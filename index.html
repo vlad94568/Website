@@ -29,11 +29,11 @@
       <button class="tab tab--active" id="tab-games" role="tab" aria-selected="true">Games</button>
     </nav>
 
-    <div class="profile">
-      <!-- ✏️ Replace with your initial (or swap div for an <img> photo) -->
-      <div class="profile-pic">V</div>
-      <span class="profile-name">Vlad</span>
+    <div class="status-indicator">
+      <span class="status-dot" aria-hidden="true"></span>
+      <span class="status-text">Available for work</span>
     </div>
+
   </header>
 
   <!-- ── Main content ──────────────────────────────────────── -->
@@ -64,6 +64,21 @@
           <div class="about-stats">
             <div class="stat"><div class="stat-num" id="stat-games">--</div><div class="stat-label">Games Shipped</div></div>
             <div class="stat"><div class="stat-num">2015</div><div class="stat-label">Started</div></div>
+          </div>
+
+          <div class="about-links">
+            <a class="about-link-btn" href="https://github.com/vlad94568" target="_blank" rel="noopener">
+              <svg class="about-link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a class="about-link-btn" href="https://vlad94568.itch.io/" target="_blank" rel="noopener">
+              <svg class="about-link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.13 1.338C2.08 1.96.02 4.328 0 4.95v1.03c0 1.303 1.22 2.45 2.325 2.45 1.33 0 2.436-1.102 2.436-2.41 0 1.308 1.07 2.41 2.4 2.41 1.328 0 2.362-1.102 2.362-2.41 0 1.308 1.106 2.41 2.435 2.41h.043c1.33 0 2.435-1.102 2.435-2.41 0 1.308 1.034 2.41 2.362 2.41 1.33 0 2.4-1.102 2.4-2.41 0 1.308 1.106 2.41 2.436 2.41C22.78 8.43 24 7.283 24 5.98V4.95c-.02-.622-2.08-2.99-3.13-3.612C19.948.767 14.05.63 12 .63c-2.05 0-7.948.138-8.87.708zM8.07 9.6a3.558 3.558 0 0 1-1.58.372 3.604 3.604 0 0 1-1.504-.327v5.556c-.5-.05-2.278-.125-3.762.748L1.2 16v5.5c0 .5.162 1 1 1h19.6c.838 0 1-.5 1-1V16l-.024-.05c-1.484-.874-3.262-.799-3.762-.75V9.645a3.604 3.604 0 0 1-1.504.327 3.558 3.558 0 0 1-1.58-.372 3.527 3.527 0 0 1-2.394.932h-.043A3.527 3.527 0 0 1 11.1 9.6a3.527 3.527 0 0 1-2.394.932A3.527 3.527 0 0 1 6.31 9.6zm-.95 4.178h7.762v1.84H9.89v2.674h4.128v1.74H7.12v-6.254z"/></svg>
+              itch.io
+            </a>
+            <a class="about-link-btn" href="https://www.fortnite.com/@vladdev" target="_blank" rel="noopener">
+              <span class="about-link-icon about-link-icon--fortnite" aria-hidden="true">F</span>
+              Fortnite
+            </a>
           </div>
         </div>
       </div>

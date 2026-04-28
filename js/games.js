@@ -9,7 +9,10 @@
      year        — release year shown in the detail panel, e.g. 2024
      description — 1–3 sentences shown in the detail panel
      thumbnail   — path to cover image, e.g. "assets/thumbnails/foo.jpg"
-                   (recommended ~600×450 px, JPG or PNG)
+                   (recommended 600×450 px / 4:3 ratio, JPG or PNG)
+                   The card displays it at 4:3; the detail panel crops it to
+                   1:1 (square) from the center. Keep the main subject centered
+                   so it looks good in both views.
      link        — full URL opened when player presses Enter / clicks Play
 
    ── HOW TO ADD A GAME ──

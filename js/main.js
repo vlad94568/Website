@@ -98,8 +98,13 @@
     label.className = 'card-label';
     label.textContent = game.title || 'Untitled';
 
+    const year = document.createElement('div');
+    year.className = 'card-year';
+    year.textContent = game.year ? String(game.year) : '';
+
     card.appendChild(thumbWrap);
     card.appendChild(label);
+    card.appendChild(year);
 
     card.addEventListener('click',    () => setFocus(index));
     card.addEventListener('dblclick', () => openGame(index));
