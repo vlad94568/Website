@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- Animated wave background (PS4 Dynamic Menu) -->
+<div class="bg" aria-hidden="true">
+  <div class="bg-gradient"></div>
+
+  <canvas class="bg-waves" id="bg-waves" aria-hidden="true"></canvas>
+
+  <div class="bg-haze"></div>
+  <div class="bg-vignette"></div>
+</div>
+
+<div class="app">
+
+  <!-- ── Top bar ───────────────────────────────────────────── -->
+  <header class="topbar" role="banner">
+    <div class="clock" id="clock">--:--</div>
+
+    <nav class="tabs" role="tablist" aria-label="Main sections">
+      <button class="tab" id="tab-about" role="tab" aria-selected="false">About Me</button>
+      <button class="tab tab--active" id="tab-games" role="tab" aria-selected="true">Games</button>
+    </nav>
+
+    <div class="profile">
+      <!-- ✏️ Replace with your initial (or swap div for an <img> photo) -->
+      <div class="profile-pic">V</div>
+      <span class="profile-name">Vlad</span>
+    </div>
+  </header>
+
+  <!-- ── Main content ──────────────────────────────────────── -->
+  <main class="content">
+
+    <!-- About Me ──────────────────────────────────────────── -->
+    <section id="about-section" class="section" aria-labelledby="about-heading">
+      <div class="about">
+        <!-- ✏️ Replace the letter below with your own photo:
+             <img class="about-photo" src="assets/your-photo.jpg" alt=""> -->
+        <div class="about-photo">V</div>
+
+        <div class="about-body">
+          <!-- ✏️ Edit name, role, and bio -->
+          <div class="about-eyebrow">PROFILE</div>
+          <h1 id="about-heading">Vlad Ivanov</h1>
+          <div class="about-role">Indie Game Developer</div>
+          <p class="about-bio">
+            I’m a high school student and game developer based in the Bay Area, California.
+            I wrote my first line of code in Scratch when I was 7, and since then I’ve
+            been teaching myself programming, game engines, and modern game development.
+            I enjoy creating unique, engaging games that combine creative ideas with
+            strong technical systems. I mainly work with tools like UEFN, Unreal Engine,
+            Unity, Godot, and languages such as Python, Java, C#, and C++.
+          </p>
+
+          <!-- ✏️ Optional: edit/remove these stat cards -->
+          <div class="about-stats">
+            <div class="stat"><div class="stat-num" id="stat-games">--</div><div class="stat-label">Games Shipped</div></div>
+            <div class="stat"><div class="stat-num">2015</div><div class="stat-label">Started</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Games ─────────────────────────────────────────────── -->
+    <section id="games-section" class="section section--active" aria-labelledby="games-heading">
+      <div class="games">
+        <div class="games-eyebrow" id="games-heading">LIBRARY</div>
+
+        <div class="shelf-wrap">
+          <button class="shelf-arrow shelf-arrow--left" id="arrow-left" aria-label="Previous game">‹</button>
+          <div class="shelf" id="shelf" role="list"></div>
+          <button class="shelf-arrow shelf-arrow--right" id="arrow-right" aria-label="Next game">›</button>
+        </div>
+
+        <article class="detail" id="detail" aria-live="polite">
+          <div class="detail-thumb-wrap">
+            <img class="detail-thumb" id="detail-thumb" src="" alt="">
+            <div class="detail-thumb-fallback" id="detail-thumb-fallback"></div>
+          </div>
+          <div class="detail-body">
+            <h2 class="detail-title" id="detail-title"></h2>
+            <div class="detail-year" id="detail-year"></div>
+            <p class="detail-desc" id="detail-desc"></p>
+            <a class="play-btn" id="detail-link" href="#" target="_blank" rel="noopener">
+              <span class="play-btn-icon">▶</span>
+              <span>PLAY GAME</span>
+            </a>
+          </div>
+        </article>
+
+        <p class="empty-msg" id="empty-msg" hidden>No games yet — add one in <code>js/games.js</code>.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ── Footer / controller hints ─────────────────────────── -->
+  <footer class="hints" aria-hidden="true">
+    <span class="hint"><kbd class="key key--enter">Enter</kbd> Play</span>
+    <span class="hint"><kbd class="key">←</kbd><kbd class="key">→</kbd> Navigate</span>
+    <span class="hint"><kbd class="key">↑</kbd><kbd class="key">↓</kbd> Switch Section</span>
+  </footer>
+</div>
+
+<script src="js/games.js"></script>
+<script src="js/main.js"></script>
+<script src="js/waves.js"></script>
+</body>
+</html>
