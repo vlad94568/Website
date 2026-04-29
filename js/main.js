@@ -25,8 +25,11 @@
     detailFb:     $('detail-thumb-fallback'),
     detailTitle:  $('detail-title'),
     detailYear:   $('detail-year'),
-    detailDesc:   $('detail-desc'),
-    detailLink:   $('detail-link'),
+    detailDesc:        $('detail-desc'),
+    detailScreenshots: $('detail-screenshots'),
+    detailLink:        $('detail-link'),
+    lightbox:          $('lightbox'),
+    lightboxImg:       $('lightbox-img'),
     emptyMsg:     $('empty-msg'),
 
     sectionAbout: $('about-section'),
@@ -147,7 +150,7 @@
     setTimeout(() => {
       dom.detailTitle.textContent = game.title || '';
       dom.detailYear.textContent  = game.year ? String(game.year) : '';
-      dom.detailDesc.textContent  = game.description || '';
+      dom.detailDesc.innerHTML    = renderMarkdown(game.description || '');
       dom.detailLink.href         = game.link || '#';
       dom.detailLink.style.pointerEvents = game.link ? 'auto' : 'none';
       dom.detailLink.style.opacity       = game.link ? '1' : '0.4';
@@ -172,6 +175,20 @@
       } else {
         dom.detailThumb.style.display = 'none';
         dom.detailFb.style.display = 'flex';
+      }
+
+      // Screenshots
+      dom.detailScreenshots.innerHTML = '';
+      if (Array.isArray(game.screenshots) && game.screenshots.length > 0) {
+        game.screenshots.forEach((src) => {
+          const img = document.createElement('img');
+          img.className = 'detail-screenshot-img';
+          img.src = src;
+          img.alt = '';
+          img.loading = 'lazy';
+          img.addEventListener('click', () => openLightbox(src));
+          dom.detailScreenshots.appendChild(img);
+        });
       }
 
       dom.detail.classList.add('detail--visible');
@@ -265,6 +282,61 @@
 
   // ── Helpers ──────────────────────────────────────────────────
   function clamp(v, lo, hi) { return Math.max(lo, Math.min(v, hi)); }
+
+  function renderMarkdown(text) {
+    const lines = text.split('\n');
+    const html = [];
+    let inList = false;
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const listMatch = line.match(/^[-*] (.+)/);
+
+      if (listMatch) {
+        if (!inList) { html.push('<ul>'); inList = true; }
+        html.push('<li>' + inlineMarkdown(listMatch[1]) + '</li>');
+      } else {
+        if (inList) { html.push('</ul>'); inList = false; }
+        if (line.trim() === '') {
+          // blank line — paragraph break (skip empty output)
+        } else {
+          html.push('<p>' + inlineMarkdown(line) + '</p>');
+        }
+      }
+    }
+
+    if (inList) html.push('</ul>');
+    return html.join('');
+  }
+
+  // ── Lightbox ─────────────────────────────────────────────────
+  function openLightbox(src) {
+    dom.lightboxImg.src = src;
+    dom.lightbox.classList.add('lightbox--open');
+    dom.lightbox.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeLightbox() {
+    dom.lightbox.classList.remove('lightbox--open');
+    dom.lightbox.setAttribute('aria-hidden', 'true');
+  }
+
+  dom.lightbox.addEventListener('click', closeLightbox);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dom.lightbox.classList.contains('lightbox--open')) {
+      closeLightbox();
+    }
+  });
+
+  function inlineMarkdown(text) {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g,     '<em>$1</em>');
+  }
 
   // ── Boot ─────────────────────────────────────────────────────
   renderCards();
