@@ -179,17 +179,15 @@
 
       // Screenshots
       dom.detailScreenshots.innerHTML = '';
-      if (Array.isArray(game.screenshots) && game.screenshots.length > 0) {
-        game.screenshots.forEach((src) => {
-          const img = document.createElement('img');
-          img.className = 'detail-screenshot-img';
-          img.src = src;
-          img.alt = '';
-          img.loading = 'lazy';
-          img.addEventListener('click', () => openLightbox(src));
-          dom.detailScreenshots.appendChild(img);
-        });
-      }
+      (Array.isArray(game.screenshots) ? game.screenshots : []).forEach((src) => {
+        const img = document.createElement('img');
+        img.className = 'detail-screenshot-img';
+        img.src = src;
+        img.alt = '';
+        img.loading = 'lazy';
+        img.addEventListener('click', () => openLightbox(src));
+        dom.detailScreenshots.appendChild(img);
+      });
 
       dom.detail.classList.add('detail--visible');
     }, 90);
@@ -334,6 +332,7 @@
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
+      .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.+?)\*/g,     '<em>$1</em>');
   }

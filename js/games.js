@@ -14,9 +14,8 @@
                      - Blank lines create paragraph breaks
      thumbnail   — path to cover image, e.g. "assets/thumbnails/foo.jpg"
                    (recommended 600×450 px / 4:3 ratio, JPG or PNG)
-                   The card displays it at 4:3; the detail panel crops it to
-                   1:1 (square) from the center. Keep the main subject centered
-                   so it looks good in both views.
+                   Both the card and detail panel display it at 4:3 without
+                   cropping or stretching.
      screenshots — (optional) array of image paths shown below the description
                    e.g. ["assets/screenshots/game1-a.jpg", "assets/screenshots/game1-b.jpg"]
                    Displayed as a 160×90 px scrollable strip. Leave as [] or omit if none.
@@ -37,20 +36,26 @@
 
 const GAMES = [
   {
-    title:       "Game One",
-    year:        2024,
-    description: `A short pitch for your first game. What is it, what's the hook?
+    title:       "BRICKS",
+    year:        2018,
+    description: `An arcade style brich shooter. Bricks rain from the sky and you have to shoot them before they hit the ground.
 
-- Built with **Unity** and C#
-- Supports local co-op up to 4 players
-- *Jam entry* — made in 48 hours`,
-    thumbnail:   "assets/thumbnails/game1.jpg",
+- Built with **Python** and **Pygame**
+- Multiple levels with varying difficulty
+- First game I made as a self taught developer
+
+Play the original [itch.io](https://vlad94568.itch.io/bricks)!`,
+    thumbnail:   "assets/thumbnails/bricks_thumb.png",
     screenshots: [
-      "https://placehold.co/320x180/1a1a2e/a0aec0?text=Screenshot+1",
-      "https://placehold.co/320x180/1a1a2e/a0aec0?text=Screenshot+2",
-      "https://placehold.co/320x180/1a1a2e/a0aec0?text=Screenshot+3"
+      "assets/screenshots/bricks/sc1.png",
+      "assets/screenshots/bricks/sc2.png",
+      "assets/screenshots/bricks/sc3.png",
+      "assets/screenshots/bricks/sc4.png",
+      "assets/screenshots/bricks/sc5.png",
+      "assets/screenshots/bricks/sc6.png",
+      "assets/screenshots/bricks/sc7.png"
     ],
-    link:        "https://itch.io"
+    link:        "https://vlad94568.itch.io/bricks-web"
   },
   {
     title:       "Game Two",
