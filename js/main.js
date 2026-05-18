@@ -28,6 +28,8 @@
     detailDesc:        $('detail-desc'),
     detailScreenshots: $('detail-screenshots'),
     detailLink:        $('detail-link'),
+    playIcon:          $('play-btn-icon'),
+    playLabel:         $('play-btn-label'),
     lightbox:          $('lightbox'),
     lightboxImg:       $('lightbox-img'),
     emptyMsg:     $('empty-msg'),
@@ -151,7 +153,11 @@
       dom.detailTitle.textContent = game.title || '';
       dom.detailYear.textContent  = game.year ? String(game.year) : '';
       dom.detailDesc.innerHTML    = renderMarkdown(game.description || '');
-      dom.detailLink.href         = game.link || '#';
+      // Play button — finished:false games show "VIEW PAGE" instead of "PLAY GAME"
+      const finished = game.finished !== false;
+      dom.playLabel.textContent = finished ? 'PLAY GAME' : 'VIEW PAGE';
+      dom.playIcon.textContent  = '▶';
+      dom.detailLink.href = game.link || '#';
       dom.detailLink.style.pointerEvents = game.link ? 'auto' : 'none';
       dom.detailLink.style.opacity       = game.link ? '1' : '0.4';
 
