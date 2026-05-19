@@ -97,5 +97,50 @@ Play the original [itch.io](https://vlad94568.itch.io/bricks)!`,
     ],
     link:        "https://vlad94568.itch.io/slidr",
     finished:    true
+  },
+  {
+    title:       "VR Jenga",
+    year:        2023,
+    description: `A VR tech demo bringing the Jenga game to virtual reality with controller based hand gestures.
+
+- Built with **Unity** and **Oculus SDK**
+- Controller-based hand gestures
+- First VR development project`,
+    thumbnail:   "assets/thumbnails/jengathumb.png",
+    screenshots: [
+      "assets/screenshots/jenga/jenga1.gif"
+    ],
+    link:        "https://github.com/vlad94568/VR_Jenga",
+    finished:    false
+  },
+  {
+    title:       "Realistic Boxfights & Zonewars",
+    year:        2023,
+    description: `A competitive Fortnite map blending Boxfight and Zonewars gameplay with Battle Royale weapons and randomized loadouts.
+
+- Built with **UEFN(Unreal Editor for Fortnite)**
+- Competitive environments built with **UEFN's terrain editor**
+- First **UEFN** project`,
+    thumbnail:   "assets/thumbnails/boxzonethumb.png",
+    screenshots: [
+      
+    ],
+    link:        "https://www.fortnite.com/@vladdev/1843-3269-2782",
+    finished:    true
+  },
+  {
+    title:       "Instant 1v1 Boxfights",
+    year:        2023,
+    description: `A competitive Fortnite 1v1 boxfights gamemode with stat tracking and nearly 10,000 plays.
+
+- Built with **UEFN(Unreal Editor for Fortnite)**
+- Nearly **10,000 plays**
+- Player statistics tracking system`,
+    thumbnail:   "assets/thumbnails/boxfightthumb.png",
+    screenshots: [
+      "assets/screenshots/boxfight/boxfight1.png"
+    ],
+    link:        "https://www.fortnite.com/@vladdev/5054-0270-5869",
+    finished:    true
   }
 ];

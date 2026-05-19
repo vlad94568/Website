@@ -263,6 +263,10 @@ img.about-photo { object-fit: cover; }
   transform: translateY(0);
 }
 
+/* Games section anchors to top so the card row never shifts when the
+   detail panel's height changes between games. */
+#games-section { justify-content: flex-start; }
+
 /* ── About section ──────────────────────────────────────────── */
 
 .about {
