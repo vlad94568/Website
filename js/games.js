@@ -142,5 +142,35 @@ Play the original [itch.io](https://vlad94568.itch.io/bricks)!`,
     ],
     link:        "https://www.fortnite.com/@vladdev/5054-0270-5869",
     finished:    true
+  },
+  {
+    title:       "Parkour Rally",
+    year:        2024,
+    description: `A vehicle platformer with obstacle courses across multiple themed worlds, each with custom built assets.
+
+- Built with **UEFN(Unreal Editor for Fortnite)**
+- Multiple worlds with unique themes and challenges
+- Custom **3D** assets built with **UEFN's modeling tools**`,
+    thumbnail:   "assets/thumbnails/rallythumb.png",
+    screenshots: [
+
+    ],
+    link:        "https://www.fortnite.com/@vladdev/2877-1961-2474",
+    finished:    true
+  },
+  {
+    title:       "Would You Rather",
+    year:        2025,
+    description: `A multiplayer party game where players split into teams based on "Would You Rather" questions, then battle it out in minigames.
+
+- Built with **UEFN(Unreal Editor for Fortnite)**
+- Peaked at **280 concurrent players** and **121K minutes played**
+- Team based minigames driven by Would You Rather questions`,
+    thumbnail:   "assets/thumbnails/wouldratherthumb.png",
+    screenshots: [
+      
+    ],
+    link:        "https://www.fortnite.com/@vladdev/8421-8116-8269",
+    finished:    true
   }
 ];
