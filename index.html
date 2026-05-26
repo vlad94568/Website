@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
+  <title>Vlad Ivanov — Game Developer Portfolio</title>
+  <meta name="description" content="Personal game development portfolio of Vlad Ivanov — games built across UEFN, Unity, Godot, and PyGame from 2018 to 2025.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23182580'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Segoe UI,Arial,sans-serif' font-size='20' font-weight='700' fill='%235cc9fb'>V</text></svg>">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -22,18 +24,10 @@
 
   <!-- ── Top bar ───────────────────────────────────────────── -->
   <header class="topbar" role="banner">
-    <div class="clock" id="clock">--:--</div>
-
     <nav class="tabs" role="tablist" aria-label="Main sections">
       <button class="tab" id="tab-about" role="tab" aria-selected="false">About Me</button>
       <button class="tab tab--active" id="tab-games" role="tab" aria-selected="true">Games</button>
     </nav>
-
-    <div class="status-indicator">
-      <span class="status-dot" aria-hidden="true"></span>
-      <span class="status-text">Available for work</span>
-    </div>
-
   </header>
 
   <!-- ── Main content ──────────────────────────────────────── -->
@@ -63,7 +57,45 @@
           <!-- ✏️ Optional: edit/remove these stat cards -->
           <div class="about-stats">
             <div class="stat"><div class="stat-num" id="stat-games">--</div><div class="stat-label">Games Shipped</div></div>
-            <div class="stat"><div class="stat-num">2015</div><div class="stat-label">Started</div></div>
+            <div class="stat"><div class="stat-num">9+</div><div class="stat-label">Years Coding</div></div>
+            <div class="stat"><div class="stat-num">200K+</div><div class="stat-label">Minutes Played</div></div>
+            <div class="stat"><div class="stat-num">10K+</div><div class="stat-label">Unique Players</div></div>
+          </div>
+
+          <!-- Skills ─────────────────────────────────────── -->
+          <div class="about-skills">
+            <div class="skill-group">
+              <div class="skill-group-label">Engines</div>
+              <div class="skill-tags">
+                <span class="skill-tag">UEFN</span>
+                <span class="skill-tag">Unity</span>
+                <span class="skill-tag">Unreal Engine</span>
+                <span class="skill-tag">Godot</span>
+                <span class="skill-tag">Roblox</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Languages</div>
+              <div class="skill-tags">
+                <span class="skill-tag">Verse</span>
+                <span class="skill-tag">C#</span>
+                <span class="skill-tag">C++</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Java</span>
+                <span class="skill-tag">Lua</span>
+                <span class="skill-tag">GDScript</span>
+              </div>
+            </div>
+            <div class="skill-group">
+              <div class="skill-group-label">Tools</div>
+              <div class="skill-tags">
+                <span class="skill-tag">Git</span>
+                <span class="skill-tag">Blender</span>
+                <span class="skill-tag">Photoshop</span>
+                <span class="skill-tag">Figma</span>
+                <span class="skill-tag">Cursor</span>
+              </div>
+            </div>
           </div>
 
           <div class="about-links">
@@ -85,27 +117,13 @@
     </section>
 
     <!-- Games ─────────────────────────────────────────────── -->
-    <section id="games-section" class="section section--active" aria-labelledby="games-heading">
+    <section id="games-section" class="section section--active">
       <div class="games">
-        <div class="games-eyebrow" id="games-heading">LIBRARY</div>
-
-        <div class="featured" id="featured" hidden>
-          <div class="featured-tag">LATEST PROJECT</div>
-          <button class="featured-card" id="featured-card" type="button">
-            <div class="featured-thumb-wrap">
-              <img class="featured-thumb" id="featured-thumb" src="" alt="">
-              <div class="featured-thumb-fallback" id="featured-thumb-fallback"></div>
-            </div>
-            <div class="featured-info">
-              <h3 class="featured-title" id="featured-title"></h3>
-              <div class="featured-year" id="featured-year"></div>
-              <span class="featured-link" id="featured-link">
-                <span class="play-btn-icon">▶</span>
-                <span id="featured-link-label">PLAY GAME</span>
-              </span>
-            </div>
-          </button>
+        <div class="timeline-header">
+          <span class="timeline-label">TIMELINE</span>
+          <span class="timeline-hint">Oldest → Newest</span>
         </div>
+        <div class="timeline" id="timeline" aria-label="Project timeline"></div>
 
         <div class="shelf-wrap">
           <button class="shelf-arrow shelf-arrow--left" id="arrow-left" aria-label="Previous game">‹</button>
@@ -121,6 +139,8 @@
           <div class="detail-body">
             <h2 class="detail-title" id="detail-title"></h2>
             <div class="detail-year" id="detail-year"></div>
+            <div class="detail-meta" id="detail-meta"></div>
+            <div class="detail-metrics" id="detail-metrics"></div>
             <div class="detail-desc" id="detail-desc"></div>
             <div class="detail-screenshots" id="detail-screenshots"></div>
             <a class="play-btn"  id="detail-link" href="#" target="_blank" rel="noopener">
@@ -130,13 +150,13 @@
           </div>
         </article>
 
-        <p class="empty-msg" id="empty-msg" hidden>No games yet — add one in <code>js/games.js</code>.</p>
+        <p class="empty-msg" id="empty-msg" hidden>No games to display.</p>
       </div>
     </section>
   </main>
 
   <!-- ── Footer / controller hints ─────────────────────────── -->
-  <footer class="hints" aria-hidden="true">
+  <footer class="hints">
     <span class="hint"><kbd class="key key--enter">Enter</kbd> Play</span>
     <span class="hint"><kbd class="key">←</kbd><kbd class="key">→</kbd> Navigate</span>
     <span class="hint"><kbd class="key">↑</kbd><kbd class="key">↓</kbd> Switch Section</span>
