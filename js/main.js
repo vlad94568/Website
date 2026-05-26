@@ -81,8 +81,7 @@
     });
 
     renderTimeline();
-    // Open on newest game so progression endpoint is visible first
-    setFocus(games.length - 1, { scroll: false });
+    setFocus(0, { scroll: false });
   }
 
   // ── Timeline strip ───────────────────────────────────────────
