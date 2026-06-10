@@ -3,175 +3,183 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vlad Ivanov — Game Developer Portfolio</title>
-  <meta name="description" content="Personal game development portfolio of Vlad Ivanov — games built across UEFN, Unity, Godot, and PyGame from 2018 to 2025.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23182580'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='Segoe UI,Arial,sans-serif' font-size='20' font-weight='700' fill='%235cc9fb'>V</text></svg>">
+  <title>vladdev — solo game developer</title>
+  <meta name="description" content="vladdev — solo indie game developer. Games built across UEFN, Unity, Godot, and PyGame.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23080C18'/><text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='18' font-weight='500' fill='%237FDBFF'>v_</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- Animated wave background (PS4 Dynamic Menu) -->
-<div class="bg" aria-hidden="true">
-  <div class="bg-gradient"></div>
+<!-- Scanline overlay -->
+<div class="scanlines" aria-hidden="true"></div>
 
-  <canvas class="bg-waves" id="bg-waves" aria-hidden="true"></canvas>
+<!-- ── Navigation ─────────────────────────────────────────── -->
+<nav class="nav" id="nav" aria-label="Main navigation">
+  <a class="nav-brand" href="#top">vladdev</a>
+  <div class="nav-links" id="nav-links">
+    <a class="nav-link" href="#about">about</a>
+    <a class="nav-link" href="#games">games</a>
+    <a class="nav-link" href="#tools">tools</a>
+    <a class="nav-link" href="#contact">contact</a>
+  </div>
+  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-  <div class="bg-haze"></div>
-  <div class="bg-vignette"></div>
+<!-- Mobile full-screen menu overlay -->
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">×</button>
+  <a class="mobile-menu-link" href="#about">about</a>
+  <a class="mobile-menu-link" href="#games">games</a>
+  <a class="mobile-menu-link" href="#tools">tools</a>
+  <a class="mobile-menu-link" href="#contact">contact</a>
 </div>
 
-<div class="app">
+<main id="top">
 
-  <!-- ── Top bar ───────────────────────────────────────────── -->
-  <header class="topbar" role="banner">
-    <nav class="tabs" role="tablist" aria-label="Main sections">
-      <button class="tab" id="tab-about" role="tab" aria-selected="false">About Me</button>
-      <button class="tab tab--active" id="tab-games" role="tab" aria-selected="true">Games</button>
-    </nav>
-  </header>
+  <!-- ── 1. Hero ──────────────────────────────────────────── -->
+  <section class="hero" id="hero">
+    <canvas class="hero-particles" id="hero-particles" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <h1 class="hero-title">vladdev</h1>
+      <p class="hero-sub">solo developer. multiple engines. real games.</p>
+      <div class="hero-divider" aria-hidden="true"></div>
+      <a class="hero-cta" href="#about">[ scroll to explore ]<span class="cursor" aria-hidden="true">_</span></a>
+    </div>
+  </section>
 
-  <!-- ── Main content ──────────────────────────────────────── -->
-  <main class="content">
-
-    <!-- About Me ──────────────────────────────────────────── -->
-    <section id="about-section" class="section" aria-labelledby="about-heading">
-      <div class="about">
-        <!-- ✏️ Replace the letter below with your own photo:
-             <img class="about-photo" src="assets/your-photo.jpg" alt=""> -->
-        <div class="about-photo">V</div>
-
-        <div class="about-body">
-          <!-- ✏️ Edit name, role, and bio -->
-          <div class="about-eyebrow">PROFILE</div>
-          <h1 id="about-heading">Vlad Ivanov</h1>
-          <div class="about-role">Indie Game Developer</div>
-          <p class="about-bio">
-            I’m a high school student and game developer based in the Bay Area, California.
-            I wrote my first line of code in Scratch when I was 7, and since then I’ve
-            been teaching myself programming, game engines, and modern game development.
-            I enjoy creating unique, engaging games that combine creative ideas with
-            strong technical systems. I mainly work with tools like UEFN, Unreal Engine,
-            Unity, Godot, and languages such as Python, Java, C#, and C++.
-          </p>
-
-          <!-- ✏️ Optional: edit/remove these stat cards -->
-          <div class="about-stats">
-            <div class="stat"><div class="stat-num" id="stat-games">--</div><div class="stat-label">Games Shipped</div></div>
-            <div class="stat"><div class="stat-num">9+</div><div class="stat-label">Years Coding</div></div>
-            <div class="stat"><div class="stat-num">200K+</div><div class="stat-label">Minutes Played</div></div>
-            <div class="stat"><div class="stat-num">10K+</div><div class="stat-label">Unique Players</div></div>
-          </div>
-
-          <!-- Skills ─────────────────────────────────────── -->
-          <div class="about-skills">
-            <div class="skill-group">
-              <div class="skill-group-label">Engines</div>
-              <div class="skill-tags">
-                <span class="skill-tag">UEFN</span>
-                <span class="skill-tag">Unity</span>
-                <span class="skill-tag">Unreal Engine</span>
-                <span class="skill-tag">Godot</span>
-                <span class="skill-tag">Roblox</span>
-              </div>
-            </div>
-            <div class="skill-group">
-              <div class="skill-group-label">Languages</div>
-              <div class="skill-tags">
-                <span class="skill-tag">Verse</span>
-                <span class="skill-tag">C#</span>
-                <span class="skill-tag">C++</span>
-                <span class="skill-tag">Python</span>
-                <span class="skill-tag">Java</span>
-                <span class="skill-tag">Lua</span>
-                <span class="skill-tag">GDScript</span>
-              </div>
-            </div>
-            <div class="skill-group">
-              <div class="skill-group-label">Tools</div>
-              <div class="skill-tags">
-                <span class="skill-tag">Git</span>
-                <span class="skill-tag">Blender</span>
-                <span class="skill-tag">Photoshop</span>
-                <span class="skill-tag">Figma</span>
-                <span class="skill-tag">Cursor</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="about-links">
-            <a class="about-link-btn" href="https://github.com/vlad94568" target="_blank" rel="noopener">
-              <svg class="about-link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-              GitHub
-            </a>
-            <a class="about-link-btn" href="https://vlad94568.itch.io/" target="_blank" rel="noopener">
-              <svg class="about-link-icon" viewBox="0 0 245.371 220.736" fill="currentColor" aria-hidden="true"><path d="M31.99 1.365C21.287 7.72.2 31.945 0 38.298v10.516C0 62.144 12.46 73.86 23.773 73.86c13.584 0 24.902-11.258 24.903-24.62 0 13.362 10.93 24.62 24.515 24.62 13.586 0 24.165-11.258 24.165-24.62 0 13.362 11.622 24.62 25.207 24.62h.246c13.586 0 25.208-11.258 25.208-24.62 0 13.362 10.58 24.62 24.164 24.62 13.585 0 24.515-11.258 24.515-24.62 0 13.362 11.32 24.62 24.903 24.62 11.313 0 23.773-11.714 23.773-25.046V38.298c-.2-6.354-21.287-30.58-31.988-36.933C180.118.197 157.056-.005 122.685 0c-34.37.003-81.228.54-90.697 1.365zm65.194 66.217a28.025 28.025 0 0 1-4.78 6.155c-5.128 5.014-12.157 8.122-19.906 8.122a28.482 28.482 0 0 1-19.948-8.126c-1.858-1.82-3.27-3.766-4.563-6.032l-.006.004c-1.292 2.27-3.092 4.215-4.954 6.037a28.5 28.5 0 0 1-19.948 8.12c-.934 0-1.906-.258-2.692-.528-1.092 11.372-1.553 22.24-1.716 30.164l-.002.045c-.02 4.024-.04 7.333-.06 11.93.21 23.86-2.363 77.334 10.52 90.473 19.964 4.655 56.7 6.775 93.555 6.788h.006c36.854-.013 73.59-2.133 93.554-6.788 12.883-13.14 10.31-66.614 10.52-90.474-.022-4.596-.04-7.905-.06-11.93l-.003-.045c-.162-7.926-.623-18.793-1.715-30.165-.786.27-1.757.528-2.692.528a28.5 28.5 0 0 1-19.948-8.12c-1.862-1.822-3.662-3.766-4.955-6.037l-.006-.004c-1.294 2.266-2.705 4.213-4.563 6.032a28.48 28.48 0 0 1-19.947 8.125c-7.748 0-14.778-3.11-19.906-8.123a28.025 28.025 0 0 1-4.78-6.155 27.99 27.99 0 0 1-4.736 6.155 28.49 28.49 0 0 1-19.95 8.124c-.27 0-.54-.012-.81-.02h-.007c-.27.008-.54.02-.813.02a28.49 28.49 0 0 1-19.95-8.123 27.992 27.992 0 0 1-4.736-6.155zm-20.486 26.49l-.002.01h.015c8.113.017 15.32 0 24.25 9.746 7.028-.737 14.372-1.105 21.722-1.094h.006c7.35-.01 14.694.357 21.723 1.094 8.93-9.747 16.137-9.73 24.25-9.746h.014l-.002-.01c3.833 0 19.166 0 29.85 30.007L210 165.244c8.504 30.624-2.723 31.373-16.727 31.4-20.768-.773-32.267-15.855-32.267-30.935-11.496 1.884-24.907 2.826-38.318 2.827h-.006c-13.412 0-26.823-.943-38.318-2.827 0 15.08-11.5 30.162-32.267 30.935-14.004-.027-25.23-.775-16.726-31.4L46.85 124.08C57.534 94.073 72.867 94.073 76.7 94.073zm45.985 23.582v.006c-.02.02-21.863 20.08-25.79 27.215l14.304-.573v12.474c0 .584 5.74.346 11.486.08h.006c5.744.266 11.485.504 11.485-.08v-12.474l14.304.573c-3.928-7.135-25.79-27.215-25.79-27.215v-.006l-.003.002z"/></svg>
-              itch.io
-            </a>
-            <a class="about-link-btn" href="https://www.fortnite.com/@vladdev" target="_blank" rel="noopener">
-              <svg class="about-link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m15.767 14.171.097-5.05H12.4V5.197h3.99L16.872 0H7.128v24l5.271-.985V14.17z"/></svg>
-              Fortnite
-            </a>
-          </div>
+  <!-- ── 2. About / identity strip ────────────────────────── -->
+  <section class="about" id="about">
+    <div class="about-inner reveal">
+      <div class="about-bio">
+        <div class="section-label">// about</div>
+        <p>
+          i build games alone. across engines, platforms, and genres —
+          UEFN, Unity, Godot, PyGame — whatever the idea needs.
+          coding since age 7, shipping since 2018.
+        </p>
+      </div>
+      <div class="about-stats" id="about-stats">
+        <div class="stat">
+          <div class="stat-num" data-count="4">0</div>
+          <div class="stat-label">ENGINES</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" data-count="3" data-suffix="+">0</div>
+          <div class="stat-label">PLATFORMS</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" data-count="9">0</div>
+          <div class="stat-label">PUBLISHED</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" data-count="300" data-suffix="K+">0</div>
+          <div class="stat-label">MINUTES PLAYED</div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Games ─────────────────────────────────────────────── -->
-    <section id="games-section" class="section section--active">
-      <div class="games">
-        <div class="timeline-header">
-          <span class="timeline-label">TIMELINE</span>
-          <span class="timeline-hint">Oldest → Newest</span>
-        </div>
-        <div class="timeline" id="timeline" aria-label="Project timeline"></div>
-
-        <div class="shelf-wrap">
-          <button class="shelf-arrow shelf-arrow--left" id="arrow-left" aria-label="Previous game">‹</button>
-          <div class="shelf" id="shelf" role="list"></div>
-          <button class="shelf-arrow shelf-arrow--right" id="arrow-right" aria-label="Next game">›</button>
-        </div>
-
-        <article class="detail" id="detail" aria-live="polite">
-          <div class="detail-thumb-wrap">
-            <img class="detail-thumb" id="detail-thumb" src="" alt="">
-            <div class="detail-thumb-fallback" id="detail-thumb-fallback"></div>
-          </div>
-          <div class="detail-body">
-            <h2 class="detail-title" id="detail-title"></h2>
-            <div class="detail-year" id="detail-year"></div>
-            <div class="detail-meta" id="detail-meta"></div>
-            <div class="detail-metrics" id="detail-metrics"></div>
-            <div class="detail-desc" id="detail-desc"></div>
-            <div class="detail-screenshots" id="detail-screenshots"></div>
-            <a class="play-btn"  id="detail-link" href="#" target="_blank" rel="noopener">
-              <span class="play-btn-icon" id="play-btn-icon">▶</span>
-              <span id="play-btn-label">PLAY GAME</span>
-            </a>
-          </div>
-        </article>
-
-        <p class="empty-msg" id="empty-msg" hidden>No games to display.</p>
+  <!-- ── 3. Games grid ────────────────────────────────────── -->
+  <section class="games" id="games">
+    <div class="games-inner">
+      <div class="section-label reveal">// games</div>
+      <div class="filters reveal" id="filters" role="group" aria-label="Filter games by engine">
+        <button class="filter filter--active" data-filter="all">[ all ]</button>
+        <button class="filter" data-filter="uefn">[ uefn ]</button>
+        <button class="filter" data-filter="unity">[ unity ]</button>
+        <button class="filter" data-filter="pygame">[ pygame ]</button>
       </div>
-    </section>
-  </main>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
 
-  <!-- ── Footer / controller hints ─────────────────────────── -->
-  <footer class="hints">
-    <span class="hint"><kbd class="key key--enter">Enter</kbd> Play</span>
-    <span class="hint"><kbd class="key">←</kbd><kbd class="key">→</kbd> Navigate</span>
-    <span class="hint"><kbd class="key">↑</kbd><kbd class="key">↓</kbd> Switch Section</span>
+  <!-- ── 4. Tools & engines ───────────────────────────────── -->
+  <section class="tools" id="tools">
+    <div class="tools-inner">
+      <div class="section-label reveal">// tools &amp; engines</div>
+      <div class="engines">
+        <div class="engine reveal" style="--engine-color:#00B4D8">
+          <div class="engine-head">
+            <span class="engine-dot" aria-hidden="true">●</span>
+            <span class="engine-name">UEFN</span>
+            <span class="engine-status">[ active ]</span>
+          </div>
+          <svg class="engine-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+            <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z"/><path d="M12 2v20M3 7l9 5 9-5"/>
+          </svg>
+          <p class="engine-desc">competitive maps and party games in Fortnite — boxfights, minigame collections, 280 peak concurrent players.</p>
+        </div>
+        <div class="engine reveal" style="--engine-color:#9DE8F7">
+          <div class="engine-head">
+            <span class="engine-dot" aria-hidden="true">●</span>
+            <span class="engine-name">Unity</span>
+            <span class="engine-status">[ active ]</span>
+          </div>
+          <svg class="engine-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+            <path d="M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9L12 3z"/><circle cx="12" cy="12" r="3"/>
+          </svg>
+          <p class="engine-desc">2D shooters, sliding puzzles, and a VR physics prototype built with C# and the Oculus SDK.</p>
+        </div>
+        <div class="engine reveal" style="--engine-color:#A5C8E1">
+          <div class="engine-head">
+            <span class="engine-dot" aria-hidden="true">●</span>
+            <span class="engine-name">Godot</span>
+            <span class="engine-status">[ active ]</span>
+          </div>
+          <svg class="engine-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+            <rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/>
+          </svg>
+          <p class="engine-desc">prototypes and experiments in GDScript — exploring lightweight 2D systems and game jams.</p>
+        </div>
+        <div class="engine reveal" style="--engine-color:#7FDBFF">
+          <div class="engine-head">
+            <span class="engine-dot" aria-hidden="true">●</span>
+            <span class="engine-name">PyGame</span>
+            <span class="engine-status">[ active ]</span>
+          </div>
+          <svg class="engine-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
+            <path d="M8 4h8v4h4v8h-4v4H8v-4H4V8h4V4z"/>
+          </svg>
+          <p class="engine-desc">where it started — arcade shooters in pure Python, first shipped game at the start of it all.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. Contact / footer ──────────────────────────────── -->
+  <footer class="footer" id="contact">
+    <div class="footer-watermark" aria-hidden="true">vladdev</div>
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a class="footer-link" href="https://github.com/vlad94568" target="_blank" rel="noopener">github →</a>
+        <a class="footer-link" href="https://vlad94568.itch.io/" target="_blank" rel="noopener">itch.io →</a>
+        <a class="footer-link" href="https://www.fortnite.com/@vladdev" target="_blank" rel="noopener">fortnite →</a>
+      </div>
+      <div class="footer-mark">built by vladdev. solo.</div>
+    </div>
   </footer>
-</div>
+</main>
 
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" aria-modal="true" aria-hidden="true">
-  <button class="lightbox-arrow lightbox-arrow--left" id="lightbox-prev" type="button" aria-label="Previous screenshot">‹</button>
-  <img class="lightbox-img" id="lightbox-img" src="" alt="">
-  <button class="lightbox-arrow lightbox-arrow--right" id="lightbox-next" type="button" aria-label="Next screenshot">›</button>
+<!-- ── Game modal ─────────────────────────────────────────── -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title">
+  <div class="modal-panel" id="modal-panel">
+    <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+    <div class="modal-hint" aria-hidden="true">[ esc ]</div>
+    <h2 class="modal-title" id="modal-title"></h2>
+    <div class="modal-meta" id="modal-meta"></div>
+    <div class="modal-metrics" id="modal-metrics"></div>
+    <div class="modal-desc" id="modal-desc"></div>
+    <div class="modal-shots" id="modal-shots"></div>
+    <a class="modal-cta" id="modal-cta" href="#" target="_blank" rel="noopener"></a>
+  </div>
 </div>
 
 <script src="js/games.js"></script>
 <script src="js/main.js"></script>
-<script src="js/waves.js"></script>
 </body>
 </html>
