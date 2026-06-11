@@ -232,7 +232,7 @@ Play the original on [itch.io](https://vlad94568.itch.io/bricks)!`,
     status:      "Released",
     engine:      "uefn",
     genre:       "MINIGAMES",
-    featured:    true,
+    featured:    false,
     tags:        ["UEFN", "Verse"],
     metrics:     [
       { value: "108",   label: "Peak Concurrent" },

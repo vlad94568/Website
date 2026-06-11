@@ -1,217 +1,13 @@
 /* ════════════════════════════════════════════════════════════════
-   vladdev — Gen X Soft Club portfolio logic
-   particles · scroll reveal · stat count-up · grid filter · modal
+   vladdev — Collected Works
+   catalog accordion · engine filter · thumbnail peek · ticker
    ════════════════════════════════════════════════════════════════ */
 
 (function () {
   'use strict';
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ── Hero particles ─────────────────────────────────────────
-     25 dots, slow drift, no connecting lines, rAF loop.        */
-  (function particles() {
-    const canvas = document.getElementById('hero-particles');
-    if (!canvas || reducedMotion) return;
-    const ctx = canvas.getContext('2d');
-    const COUNT = 25;
-    let dots = [];
-    let w = 0, h = 0;
-
-    function resize() {
-      w = canvas.width = canvas.offsetWidth;
-      h = canvas.height = canvas.offsetHeight;
-    }
-
-    function spawn() {
-      dots = Array.from({ length: COUNT }, () => ({
-        x: Math.random() * w,
-        y: Math.random() * h,
-        r: 0.8 + Math.random() * 1.4,
-        vx: (Math.random() - 0.5) * 0.12,
-        vy: (Math.random() - 0.5) * 0.12,
-        o: 0.15 + Math.random() * 0.15,
-        blue: Math.random() > 0.5
-      }));
-    }
-
-    function tick() {
-      ctx.clearRect(0, 0, w, h);
-      for (const d of dots) {
-        d.x += d.vx;
-        d.y += d.vy;
-        if (d.x < -4) d.x = w + 4; else if (d.x > w + 4) d.x = -4;
-        if (d.y < -4) d.y = h + 4; else if (d.y > h + 4) d.y = -4;
-        ctx.beginPath();
-        ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
-        ctx.fillStyle = d.blue
-          ? `rgba(127,219,255,${d.o})`
-          : `rgba(255,255,255,${d.o})`;
-        ctx.fill();
-      }
-      requestAnimationFrame(tick);
-    }
-
-    window.addEventListener('resize', () => { resize(); });
-    resize();
-    spawn();
-    requestAnimationFrame(tick);
-  })();
-
-  /* ── Nav slide-in after 20% viewport scroll ─────────────── */
-  (function navReveal() {
-    const nav = document.getElementById('nav');
-    const threshold = () => window.innerHeight * 0.2;
-    function onScroll() {
-      nav.classList.toggle('nav--visible', window.scrollY > threshold());
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  })();
-
-  /* ── Mobile menu ──────────────────────────────────────────── */
-  (function mobileMenu() {
-    const burger = document.getElementById('nav-burger');
-    const menu = document.getElementById('mobile-menu');
-    const close = document.getElementById('mobile-menu-close');
-
-    function setOpen(open) {
-      menu.classList.toggle('mobile-menu--open', open);
-      menu.setAttribute('aria-hidden', String(!open));
-      burger.setAttribute('aria-expanded', String(open));
-    }
-
-    burger.addEventListener('click', () => setOpen(true));
-    close.addEventListener('click', () => setOpen(false));
-    menu.querySelectorAll('.mobile-menu-link').forEach(a =>
-      a.addEventListener('click', () => setOpen(false)));
-  })();
-
-  /* ── Scroll reveal (IntersectionObserver) ─────────────────── */
-  const revealObserver = new IntersectionObserver(entries => {
-    for (const e of entries) {
-      if (e.isIntersecting) {
-        e.target.classList.add('reveal--in');
-        revealObserver.unobserve(e.target);
-      }
-    }
-  }, { threshold: 0.15 });
-
-  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-  /* ── Stat count-up ────────────────────────────────────────── */
-  (function statCounters() {
-    const stats = document.getElementById('about-stats');
-    if (!stats) return;
-
-    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
-
-    function countUp(el) {
-      const target = parseInt(el.dataset.count, 10);
-      const suffix = el.dataset.suffix || '';
-      if (reducedMotion) { el.textContent = target + suffix; return; }
-      const start = performance.now();
-      const DURATION = 1200;
-      function frame(now) {
-        const t = Math.min((now - start) / DURATION, 1);
-        el.textContent = Math.round(easeOutCubic(t) * target) + suffix;
-        if (t < 1) requestAnimationFrame(frame);
-      }
-      requestAnimationFrame(frame);
-    }
-
-    const obs = new IntersectionObserver(entries => {
-      if (entries.some(e => e.isIntersecting)) {
-        stats.querySelectorAll('.stat-num').forEach(countUp);
-        obs.disconnect();
-      }
-    }, { threshold: 0.4 });
-
-    obs.observe(stats);
-  })();
-
-  /* ── Games grid ───────────────────────────────────────────── */
-  const grid = document.getElementById('grid');
   const ENGINE_LABEL = { uefn: 'UEFN', unity: 'UNITY', godot: 'GODOT', pygame: 'PYGAME' };
-
-  function ctaLabel(status) {
-    if (status === 'Prototype') return '[ view repo → ]';
-    if (status === 'In Development') return '[ view project → ]';
-    return '[ play / view → ]';
-  }
-
-  function buildCard(game, index) {
-    const card = document.createElement('button');
-    card.type = 'button';
-    card.className = 'card' + (game.featured ? ' card--wide' : '');
-    card.dataset.engine = game.engine;
-    card.dataset.index = index;
-    card.setAttribute('aria-label', `${game.title} — details`);
-
-    if (game.thumbnail) {
-      const bg = document.createElement('div');
-      bg.className = 'card-bg';
-      bg.style.backgroundImage = `url("${game.thumbnail}")`;
-      card.appendChild(bg);
-    }
-
-    const year = document.createElement('span');
-    year.className = 'card-year';
-    year.textContent = game.year;
-    card.appendChild(year);
-
-    const content = document.createElement('div');
-    content.className = 'card-content';
-
-    const title = document.createElement('div');
-    title.className = 'card-title';
-    title.textContent = game.title;
-    content.appendChild(title);
-
-    const tags = document.createElement('div');
-    tags.className = 'card-tags';
-    const engineTag = document.createElement('span');
-    engineTag.className = 'tag';
-    engineTag.textContent = `[ ${ENGINE_LABEL[game.engine] || game.engine.toUpperCase()} ]`;
-    tags.appendChild(engineTag);
-    const genreTag = document.createElement('span');
-    genreTag.className = 'tag tag--genre';
-    genreTag.textContent = game.genre;
-    tags.appendChild(genreTag);
-    content.appendChild(tags);
-
-    const reveal = document.createElement('div');
-    reveal.className = 'card-reveal';
-    const blurb = document.createElement('p');
-    blurb.className = 'card-blurb';
-    blurb.textContent = game.blurb;
-    reveal.appendChild(blurb);
-    const cta = document.createElement('span');
-    cta.className = 'card-cta';
-    cta.textContent = ctaLabel(game.status);
-    reveal.appendChild(cta);
-    content.appendChild(reveal);
-
-    card.appendChild(content);
-    card.addEventListener('click', () => openModal(game));
-    return card;
-  }
-
-  GAMES.forEach((game, i) => grid.appendChild(buildCard(game, i)));
-
-  /* ── Engine filter (ghost non-matching cards) ─────────────── */
-  (function filters() {
-    const buttons = document.querySelectorAll('.filter');
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.toggle('filter--active', b === btn));
-        const f = btn.dataset.filter;
-        grid.querySelectorAll('.card').forEach(card => {
-          card.classList.toggle('card--ghost', f !== 'all' && card.dataset.engine !== f);
-        });
-      });
-    });
-  })();
 
   /* ── Minimal markdown → HTML (bold, italics, links, bullets) ── */
   function escapeHtml(s) {
@@ -240,105 +36,224 @@
     }).join('');
   }
 
-  /* ── Modal ────────────────────────────────────────────────── */
-  const modal = document.getElementById('modal');
-  const modalTitle = document.getElementById('modal-title');
-  const modalMeta = document.getElementById('modal-meta');
-  const modalMetrics = document.getElementById('modal-metrics');
-  const modalDesc = document.getElementById('modal-desc');
-  const modalShots = document.getElementById('modal-shots');
-  const modalCta = document.getElementById('modal-cta');
-  let lastFocus = null;
+  function ctaLabel(status) {
+    if (status === 'Prototype') return 'View repo ↗';
+    if (status === 'In Development') return 'View project ↗';
+    return 'Play the game ↗';
+  }
 
-  function openModal(game) {
-    lastFocus = document.activeElement;
-    modalTitle.textContent = game.title;
+  /* ── Build catalog entries ────────────────────────────────── */
+  const container = document.getElementById('entries');
 
-    modalMeta.innerHTML = '';
-    const engineTag = document.createElement('span');
-    engineTag.className = 'tag';
-    engineTag.textContent = `[ ${ENGINE_LABEL[game.engine] || game.engine.toUpperCase()} ]`;
-    modalMeta.appendChild(engineTag);
-    const genreTag = document.createElement('span');
-    genreTag.className = 'tag tag--genre';
-    genreTag.textContent = game.genre;
-    modalMeta.appendChild(genreTag);
-    const engineLabel = ENGINE_LABEL[game.engine] || game.engine.toUpperCase();
-    (game.tags || [])
-      .filter(t => t.toUpperCase() !== engineLabel)
-      .forEach(t => {
-        const tag = document.createElement('span');
-        tag.className = 'tag tag--genre';
-        tag.textContent = t;
-        modalMeta.appendChild(tag);
+  function setDetailHeight(entry, open) {
+    const detail = entry.querySelector('.entry-detail');
+    const inner = detail.firstElementChild;
+    if (open) {
+      detail.style.height = inner.scrollHeight + 'px';
+      detail.addEventListener('transitionend', function done(e) {
+        if (e.propertyName !== 'height') return;
+        if (entry.classList.contains('entry--open')) detail.style.height = 'auto';
+        detail.removeEventListener('transitionend', done);
       });
-    if (game.dateRange) {
-      const date = document.createElement('span');
-      date.className = 'meta-date';
-      date.textContent = game.dateRange;
-      modalMeta.appendChild(date);
+    } else {
+      // pin current height so the transition has a start value
+      detail.style.height = detail.offsetHeight + 'px';
+      void detail.offsetHeight;
+      detail.style.height = '0px';
+    }
+  }
+
+  function buildEntry(game, index) {
+    const no = String(index + 1).padStart(3, '0');
+    const entry = document.createElement('div');
+    entry.className = 'entry';
+    entry.dataset.engine = game.engine;
+
+    const row = document.createElement('button');
+    row.type = 'button';
+    row.className = 'entry-row';
+    row.setAttribute('aria-expanded', 'false');
+    row.innerHTML =
+      `<span class="entry-no">${no}</span>` +
+      `<span class="entry-title">${escapeHtml(game.title)}</span>` +
+      `<span class="entry-engine">${ENGINE_LABEL[game.engine] || game.engine.toUpperCase()}</span>` +
+      `<span class="entry-genre">${escapeHtml(game.genre)}</span>` +
+      `<span class="entry-year">${game.year}</span>` +
+      `<span class="entry-toggle" aria-hidden="true">+</span>`;
+
+    const detail = document.createElement('div');
+    detail.className = 'entry-detail';
+
+    const metricsHtml = (game.metrics || []).map(m =>
+      `<div class="emetric">` +
+      `<div class="emetric-num">${escapeHtml(m.value)}</div>` +
+      `<div class="emetric-label">${escapeHtml(m.label)}</div>` +
+      `</div>`
+    ).join('');
+
+    const shotsHtml = (game.screenshots || []).slice(0, 3).map(src =>
+      `<img src="${src}" alt="${escapeHtml(game.title)} screenshot" loading="lazy">`
+    ).join('');
+
+    const mediaHtml = shotsHtml ||
+      (game.thumbnail
+        ? `<img src="${game.thumbnail}" alt="${escapeHtml(game.title)} cover" loading="lazy">`
+        : '');
+
+    detail.innerHTML =
+      `<div class="entry-detail-inner">` +
+      `<div class="entry-detail-rule">${escapeHtml(game.dateRange || String(game.year))}</div>` +
+      `<div class="entry-detail-main">` +
+      `<div class="entry-metrics">${metricsHtml}</div>` +
+      `<div class="entry-desc">` + renderMarkdown(game.description || '') + `</div>` +
+      `<div class="entry-media">${mediaHtml}</div>` +
+      `<a class="entry-cta" href="${game.link}" target="_blank" rel="noopener">${ctaLabel(game.status)}</a>` +
+      `</div>` +
+      `</div>`;
+
+    row.addEventListener('click', () => {
+      const open = entry.classList.toggle('entry--open');
+      row.setAttribute('aria-expanded', String(open));
+      setDetailHeight(entry, open);
+    });
+
+    entry.appendChild(row);
+    entry.appendChild(detail);
+    return entry;
+  }
+
+  GAMES.forEach((game, i) => container.appendChild(buildEntry(game, i)));
+
+  /* ── Engine filter (ghost non-matching rows) ──────────────── */
+  (function filters() {
+    const buttons = document.querySelectorAll('.filter');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.toggle('filter--active', b === btn));
+        const f = btn.dataset.filter;
+        container.querySelectorAll('.entry').forEach(entry => {
+          const ghost = f !== 'all' && entry.dataset.engine !== f;
+          entry.classList.toggle('entry--ghost', ghost);
+          if (ghost && entry.classList.contains('entry--open')) {
+            entry.classList.remove('entry--open');
+            entry.querySelector('.entry-row').setAttribute('aria-expanded', 'false');
+            setDetailHeight(entry, false);
+          }
+        });
+      });
+    });
+  })();
+
+  /* ── Cursor-following thumbnail peek (desktop only) ───────── */
+  (function peek() {
+    const img = document.getElementById('peek');
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!fine || reducedMotion) return;
+
+    const OFFX = 28, OFFY = -70;
+    let tx = 0, ty = 0;          // target (cursor + offset)
+    let cx = 0, cy = 0;          // current (lagged)
+    let prevX = 0;               // last frame x, for velocity
+    let lean = 0;                // smoothed horizontal velocity → rotation
+    let visible = false, raf = null;
+
+    function move(e) {
+      tx = e.clientX + OFFX;
+      ty = e.clientY + OFFY;
     }
 
-    modalMetrics.innerHTML = '';
-    (game.metrics || []).forEach(m => {
-      const block = document.createElement('div');
-      block.className = 'metric';
-      block.innerHTML =
-        `<div class="metric-num">${escapeHtml(m.value)}</div>` +
-        `<div class="metric-label">${escapeHtml(m.label)}</div>`;
-      modalMetrics.appendChild(block);
+    function loop(now) {
+      // position lags behind cursor — the heavier the lerp, the more drift
+      cx += (tx - cx) * 0.16;
+      cy += (ty - cy) * 0.16;
+
+      // velocity of the lagged point drives the lean (rotate into the swing)
+      const vx = cx - prevX;
+      prevX = cx;
+      lean += (vx - lean) * 0.2;
+
+      const rot = Math.max(-22, Math.min(22, lean * 1.6)) - 1.5; // base −1.5° rest tilt
+      const bob = Math.sin(now / 420) * 6;                        // gentle float
+      const skew = Math.max(-6, Math.min(6, lean * 0.5));         // slight whip
+
+      img.style.left = cx + 'px';
+      img.style.top = (cy + bob) + 'px';
+      img.style.transform = `rotate(${rot.toFixed(2)}deg) skewX(${skew.toFixed(2)}deg)`;
+
+      raf = visible ? requestAnimationFrame(loop) : null;
+    }
+
+    function show(thumb, e) {
+      img.src = thumb;
+      tx = cx = e.clientX + OFFX;
+      ty = cy = e.clientY + OFFY;
+      prevX = cx;
+      lean = 0;
+      img.classList.add('peek--on');
+      if (!visible) { visible = true; raf = requestAnimationFrame(loop); }
+    }
+
+    function hide() {
+      visible = false;
+      img.classList.remove('peek--on');
+      img.style.transform = '';
+    }
+
+    container.querySelectorAll('.entry').forEach((entry, i) => {
+      const row = entry.querySelector('.entry-row');
+      const thumb = GAMES[i] && GAMES[i].thumbnail;
+      if (!thumb) return;
+
+      row.addEventListener('mouseenter', e => {
+        if (entry.classList.contains('entry--open')) return;
+        show(thumb, e);
+      });
+      row.addEventListener('mousemove', move);
+      row.addEventListener('mouseleave', hide);
+      row.addEventListener('click', hide);
     });
+  })();
 
-    modalDesc.innerHTML = renderMarkdown(game.description || '');
+  /* ── Row sway: title drifts toward cursor ─────────────────── */
+  (function sway() {
+    const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (!fine || reducedMotion) return;
 
-    modalShots.innerHTML = '';
-    (game.screenshots || []).forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = `${game.title} screenshot`;
-      img.loading = 'lazy';
-      modalShots.appendChild(img);
-    });
+    container.querySelectorAll('.entry-row').forEach(row => {
+      const title = row.querySelector('.entry-title');
 
-    modalCta.href = game.link;
-    modalCta.textContent = ctaLabel(game.status);
+      row.addEventListener('mousemove', e => {
+        const r = row.getBoundingClientRect();
+        const t = (e.clientX - r.left) / r.width - 0.5; // -0.5 … 0.5
+        title.style.transform = `translateX(${(t * 18).toFixed(1)}px)`;
+      });
 
-    modal.classList.add('modal--open');
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    document.getElementById('modal-close').focus();
-  }
-
-  function closeModal() {
-    modal.classList.remove('modal--open');
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    if (lastFocus) lastFocus.focus();
-  }
-
-  document.getElementById('modal-close').addEventListener('click', closeModal);
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape' && modal.classList.contains('modal--open')) closeModal();
-  });
-
-  /* ── Footer link cursor trail ─────────────────────────────── */
-  (function cursorTrail() {
-    if (reducedMotion) return;
-    let last = 0;
-    document.querySelectorAll('.footer-link').forEach(link => {
-      link.addEventListener('mousemove', e => {
-        const now = performance.now();
-        if (now - last < 60) return; // max ~3 dots per 200ms sweep
-        last = now;
-        const dot = document.createElement('div');
-        dot.className = 'trail-dot';
-        dot.style.left = (e.clientX - 2) + 'px';
-        dot.style.top = (e.clientY - 2) + 'px';
-        document.body.appendChild(dot);
-        setTimeout(() => dot.remove(), 320);
+      row.addEventListener('mouseleave', () => {
+        title.style.transform = '';
       });
     });
+  })();
+
+  /* ── Ticker: duplicate content for seamless loop ──────────── */
+  (function ticker() {
+    const track = document.getElementById('ticker-track');
+    if (!track) return;
+    track.appendChild(track.querySelector('.ticker-content').cloneNode(true));
+  })();
+
+  /* ── Scroll reveal ────────────────────────────────────────── */
+  (function reveals() {
+    const targets = document.querySelectorAll('.entry, .tool, .about-lede, .about-body, .about-stats');
+    targets.forEach(t => t.classList.add('reveal'));
+    const obs = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add('reveal--in');
+          obs.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.1 });
+    targets.forEach(t => obs.observe(t));
   })();
 
 })();

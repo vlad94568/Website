@@ -3,181 +3,127 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>vladdev — solo game developer</title>
-  <meta name="description" content="vladdev — solo indie game developer. Games built across UEFN, Unity, Godot, and PyGame.">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23080C18'/><text x='50%25' y='58%25' dominant-baseline='middle' text-anchor='middle' font-family='monospace' font-size='18' font-weight='500' fill='%237FDBFF'>v_</text></svg>">
+  <title>vladdev — collected works</title>
+  <meta name="description" content="vladdev — solo game developer. Collected works 2018–2025, across UEFN, Unity, Godot, and PyGame.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23FF3F00'/><text x='50%25' y='60%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-size='20' font-style='italic' fill='%23F2EFE6'>v</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- Scanline overlay -->
-<div class="scanlines" aria-hidden="true"></div>
-
-<!-- ── Navigation ─────────────────────────────────────────── -->
-<nav class="nav" id="nav" aria-label="Main navigation">
-  <a class="nav-brand" href="#top">vladdev</a>
-  <div class="nav-links" id="nav-links">
-    <a class="nav-link" href="#about">about</a>
-    <a class="nav-link" href="#games">games</a>
-    <a class="nav-link" href="#tools">tools</a>
-    <a class="nav-link" href="#contact">contact</a>
-  </div>
-  <button class="nav-burger" id="nav-burger" aria-label="Open menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<!-- Mobile full-screen menu overlay -->
-<div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-  <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">×</button>
-  <a class="mobile-menu-link" href="#about">about</a>
-  <a class="mobile-menu-link" href="#games">games</a>
-  <a class="mobile-menu-link" href="#tools">tools</a>
-  <a class="mobile-menu-link" href="#contact">contact</a>
-</div>
+<!-- ── Top bar ───────────────────────────────────────────────── -->
+<header class="topbar">
+  <a class="topbar-brand" href="#top">vladdev</a>
+  <nav class="topbar-nav" aria-label="Main navigation">
+    <a href="#index">index</a>
+    <a href="#about">about</a>
+    <a href="#colophon">colophon</a>
+    <a href="#contact">contact</a>
+  </nav>
+  <span class="topbar-stamp" aria-hidden="true">EST. 2018</span>
+</header>
 
 <main id="top">
 
-  <!-- ── 1. Hero ──────────────────────────────────────────── -->
-  <section class="hero" id="hero">
-    <canvas class="hero-particles" id="hero-particles" aria-hidden="true"></canvas>
-    <div class="hero-inner">
-      <h1 class="hero-title">vladdev</h1>
-      <p class="hero-sub">solo developer. multiple engines. real games.</p>
-      <div class="hero-divider" aria-hidden="true"></div>
-      <a class="hero-cta" href="#about">[ scroll to explore ]<span class="cursor" aria-hidden="true">_</span></a>
+  <!-- ── Masthead ────────────────────────────────────────────── -->
+  <section class="masthead">
+    <div class="masthead-meta">
+      <span>CATALOG — COLLECTED WORKS</span>
+      <span>2018 — 2025</span>
+    </div>
+    <h1 class="masthead-title">vladdev<span class="masthead-period">.</span></h1>
+    <div class="masthead-sub">
+      <p class="masthead-line">solo game developer<em> — nine games, four engines, no team.</em></p>
+      <span class="masthead-no" aria-hidden="true">N°9</span>
     </div>
   </section>
 
-  <!-- ── 2. About / identity strip ────────────────────────── -->
+  <!-- ── Ticker ──────────────────────────────────────────────── -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="ticker-track">
+      <span class="ticker-content">9 GAMES SHIPPED&ensp;●&ensp;4 ENGINES&ensp;●&ensp;300K+ MINUTES PLAYED&ensp;●&ensp;280 PEAK CONCURRENT PLAYERS&ensp;●&ensp;BUILDING SINCE 2018&ensp;●&ensp;</span>
+    </div>
+  </div>
+
+  <!-- ── Catalog index ───────────────────────────────────────── -->
+  <section class="catalog" id="index">
+    <div class="catalog-head">
+      <h2 class="section-title">Index<em> of works</em></h2>
+      <div class="filters" id="filters" role="group" aria-label="Filter works by engine">
+        <span class="filters-label">FILTER —</span>
+        <button class="filter filter--active" data-filter="all">ALL</button>
+        <button class="filter" data-filter="uefn">UEFN</button>
+        <button class="filter" data-filter="unity">UNITY</button>
+        <button class="filter" data-filter="pygame">PYGAME</button>
+      </div>
+    </div>
+    <div class="catalog-cols" aria-hidden="true">
+      <span>N°</span><span>WORK</span><span>ENGINE</span><span>GENRE</span><span>YEAR</span><span></span>
+    </div>
+    <div class="entries" id="entries"></div>
+  </section>
+
+  <!-- ── About ───────────────────────────────────────────────── -->
   <section class="about" id="about">
-    <div class="about-inner reveal">
-      <div class="about-bio">
-        <div class="section-label">// about</div>
-        <p>
-          i build games alone. across engines, platforms, and genres —
-          UEFN, Unity, Godot, PyGame — whatever the idea needs.
-          coding since age 7, shipping since 2018.
-        </p>
+    <div class="about-label">ABOUT THE DEVELOPER</div>
+    <p class="about-lede">I build games <em>alone</em>.</p>
+    <p class="about-body">
+      Across engines, platforms, and genres — UEFN, Unity, Godot, PyGame —
+      whatever the idea needs. First line of code at age seven. First shipped
+      game at the start of it all, an arcade shooter in pure Python. Since
+      then: zombie hordes, sliding puzzles, virtual-reality physics, and
+      Fortnite islands played for over three hundred thousand minutes.
+    </p>
+    <div class="about-stats">
+      <div class="astat"><span class="astat-num">4</span><span class="astat-label">ENGINES</span></div>
+      <div class="astat"><span class="astat-num">3+</span><span class="astat-label">PLATFORMS</span></div>
+      <div class="astat"><span class="astat-num">9</span><span class="astat-label">PUBLISHED</span></div>
+      <div class="astat"><span class="astat-num">300K+</span><span class="astat-label">MINUTES PLAYED</span></div>
+    </div>
+  </section>
+
+  <!-- ── Colophon ────────────────────────────────────────────── -->
+  <section class="colophon" id="colophon">
+    <h2 class="section-title">Colophon<em> — tools of production</em></h2>
+    <div class="colophon-list">
+      <div class="tool">
+        <div class="tool-head"><span class="tool-name">UEFN</span><span class="tool-count">5 WORKS</span></div>
+        <p class="tool-desc">Unreal Editor for Fortnite, written in Verse. Competitive boxfights, party games, and minigame collections — the volume work of this catalog.</p>
       </div>
-      <div class="about-stats" id="about-stats">
-        <div class="stat">
-          <div class="stat-num" data-count="4">0</div>
-          <div class="stat-label">ENGINES</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num" data-count="3" data-suffix="+">0</div>
-          <div class="stat-label">PLATFORMS</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num" data-count="9">0</div>
-          <div class="stat-label">PUBLISHED</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num" data-count="300" data-suffix="K+">0</div>
-          <div class="stat-label">MINUTES PLAYED</div>
-        </div>
+      <div class="tool">
+        <div class="tool-head"><span class="tool-name">Unity</span><span class="tool-count">3 WORKS</span></div>
+        <p class="tool-desc">C# across genres — a 2D shooter, a procedural sliding puzzle, and a virtual-reality physics prototype on the Oculus SDK.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-head"><span class="tool-name">Godot</span><span class="tool-count">IN STUDY</span></div>
+        <p class="tool-desc">GDScript experiments and prototypes. Nothing in the catalog yet; the sketchbook engine.</p>
+      </div>
+      <div class="tool">
+        <div class="tool-head"><span class="tool-name">PyGame</span><span class="tool-count">1 WORK</span></div>
+        <p class="tool-desc">Where it started. Pure Python, no editor, every pixel placed by hand. Catalog entry N°001.</p>
       </div>
     </div>
   </section>
 
-  <!-- ── 3. Games grid ────────────────────────────────────── -->
-  <section class="games" id="games">
-    <div class="games-inner">
-      <div class="section-label reveal">// games</div>
-      <div class="filters reveal" id="filters" role="group" aria-label="Filter games by engine">
-        <button class="filter filter--active" data-filter="all">[ all ]</button>
-        <button class="filter" data-filter="uefn">[ uefn ]</button>
-        <button class="filter" data-filter="unity">[ unity ]</button>
-        <button class="filter" data-filter="pygame">[ pygame ]</button>
-      </div>
-      <div class="grid" id="grid"></div>
-    </div>
-  </section>
-
-  <!-- ── 4. Tools & engines ───────────────────────────────── -->
-  <section class="tools" id="tools">
-    <div class="tools-inner">
-      <div class="section-label reveal">// tools &amp; engines</div>
-      <div class="engines">
-        <div class="engine reveal" style="--engine-color:#00B4D8">
-          <div class="engine-head">
-            <span class="engine-dot" aria-hidden="true">●</span>
-            <span class="engine-name">UEFN</span>
-            <span class="engine-status">[ active ]</span>
-          </div>
-          <svg class="engine-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-            <path d="M12 2L3 7v10l9 5 9-5V7l-9-5z"/><path d="M12 2v20M3 7l9 5 9-5"/>
-          </svg>
-          <p class="engine-desc">competitive maps and party games in Fortnite — boxfights, minigame collections, 280 peak concurrent players.</p>
-        </div>
-        <div class="engine reveal" style="--engine-color:#9DE8F7">
-          <div class="engine-head">
-            <span class="engine-dot" aria-hidden="true">●</span>
-            <span class="engine-name">Unity</span>
-            <span class="engine-status">[ active ]</span>
-          </div>
-          <svg class="engine-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-            <path d="M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9L12 3z"/><circle cx="12" cy="12" r="3"/>
-          </svg>
-          <p class="engine-desc">2D shooters, sliding puzzles, and a VR physics prototype built with C# and the Oculus SDK.</p>
-        </div>
-        <div class="engine reveal" style="--engine-color:#A5C8E1">
-          <div class="engine-head">
-            <span class="engine-dot" aria-hidden="true">●</span>
-            <span class="engine-name">Godot</span>
-            <span class="engine-status">[ active ]</span>
-          </div>
-          <svg class="engine-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-            <rect x="4" y="6" width="16" height="12" rx="2"/><circle cx="9" cy="12" r="1.6"/><circle cx="15" cy="12" r="1.6"/>
-          </svg>
-          <p class="engine-desc">prototypes and experiments in GDScript — exploring lightweight 2D systems and game jams.</p>
-        </div>
-        <div class="engine reveal" style="--engine-color:#7FDBFF">
-          <div class="engine-head">
-            <span class="engine-dot" aria-hidden="true">●</span>
-            <span class="engine-name">PyGame</span>
-            <span class="engine-status">[ active ]</span>
-          </div>
-          <svg class="engine-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true">
-            <path d="M8 4h8v4h4v8h-4v4H8v-4H4V8h4V4z"/>
-          </svg>
-          <p class="engine-desc">where it started — arcade shooters in pure Python, first shipped game at the start of it all.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── 5. Contact / footer ──────────────────────────────── -->
+  <!-- ── Footer ──────────────────────────────────────────────── -->
   <footer class="footer" id="contact">
-    <div class="footer-watermark" aria-hidden="true">vladdev</div>
-    <div class="footer-inner">
-      <div class="footer-links">
-        <a class="footer-link" href="https://github.com/vlad94568" target="_blank" rel="noopener">github →</a>
-        <a class="footer-link" href="https://vlad94568.itch.io/" target="_blank" rel="noopener">itch.io →</a>
-        <a class="footer-link" href="https://www.fortnite.com/@vladdev" target="_blank" rel="noopener">fortnite →</a>
-      </div>
-      <div class="footer-mark">built by vladdev. solo.</div>
+    <div class="footer-title">Find the work<em>.</em></div>
+    <div class="footer-links">
+      <a class="footer-link" href="https://github.com/vlad94568" target="_blank" rel="noopener">GitHub<span aria-hidden="true">↗</span></a>
+      <a class="footer-link" href="https://vlad94568.itch.io/" target="_blank" rel="noopener">itch.io<span aria-hidden="true">↗</span></a>
+      <a class="footer-link" href="https://www.fortnite.com/@vladdev" target="_blank" rel="noopener">Fortnite<span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="footer-base">
+      <span>built by vladdev. solo.</span>
+      <span>bay area, california</span>
     </div>
   </footer>
 </main>
 
-<!-- ── Game modal ─────────────────────────────────────────── -->
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-title">
-  <div class="modal-panel" id="modal-panel">
-    <button class="modal-close" id="modal-close" aria-label="Close">×</button>
-    <div class="modal-hint" aria-hidden="true">[ esc ]</div>
-    <h2 class="modal-title" id="modal-title"></h2>
-    <div class="modal-meta" id="modal-meta"></div>
-    <div class="modal-metrics" id="modal-metrics"></div>
-    <div class="modal-desc" id="modal-desc"></div>
-    <div class="modal-shots" id="modal-shots"></div>
-    <a class="modal-cta" id="modal-cta" href="#" target="_blank" rel="noopener"></a>
-  </div>
-</div>
+<!-- Cursor-following thumbnail peek -->
+<img class="peek" id="peek" src="" alt="" aria-hidden="true">
 
 <script src="js/games.js"></script>
 <script src="js/main.js"></script>
