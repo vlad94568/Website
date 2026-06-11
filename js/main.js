@@ -9,6 +9,29 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const ENGINE_LABEL = { uefn: 'UEFN', unity: 'UNITY', godot: 'GODOT', pygame: 'PYGAME' };
 
+  /* ── Theme toggle (light "day edition" / dark "night edition") ── */
+  (function themeToggle() {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+
+    function apply(theme) {
+      if (theme === 'dark') document.documentElement.dataset.theme = 'dark';
+      else delete document.documentElement.dataset.theme;
+      btn.textContent = theme === 'dark' ? 'DAY' : 'NIGHT';
+      btn.setAttribute('aria-pressed', String(theme === 'dark'));
+      btn.setAttribute('aria-label',
+        theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+
+    apply(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+
+    btn.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem('theme', next); } catch (e) { /* private mode */ }
+      apply(next);
+    });
+  })();
+
   /* ── Minimal markdown → HTML (bold, italics, links, bullets) ── */
   function escapeHtml(s) {
     return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
