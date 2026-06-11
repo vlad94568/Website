@@ -91,13 +91,6 @@ em { font-family: var(--serif); font-style: italic; }
 
 .topbar-nav a:hover { color: var(--accent); }
 
-.topbar-stamp {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  color: var(--ink-faint);
-}
-
 .theme-toggle {
   font-family: var(--mono);
   font-size: 11px;
@@ -670,10 +663,11 @@ body, .topbar, .about, .ticker, .footer, .entry-cta {
 }
 
 @media (max-width: 600px) {
-  .topbar { gap: 16px; padding: 12px 20px; }
-  .topbar-nav { gap: 14px; }
-  .topbar-stamp { display: none; }
-
+  .topbar { gap: 10px; padding: 12px 20px; }
+  .topbar-brand { font-size: 17px; }
+  .topbar-nav { gap: 10px; }
+  .topbar-nav a { font-size: 10px; letter-spacing: 0.05em; }
+  .theme-toggle { font-size: 10px; padding: 4px 8px; }
   .masthead, .catalog, .about, .colophon, .footer { padding-left: 20px; padding-right: 20px; }
 
   .astat { flex: 1 1 40%; }
